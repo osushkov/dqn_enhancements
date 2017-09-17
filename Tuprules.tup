@@ -1,22 +1,35 @@
 CC = g++
+CUDACC = nvcc
 
+CCFLAGS += -pthread
 CCFLAGS += -std=c++11
-CCFLAGS += -I/usr/local/include -I/usr/include/eigen3 -I/usr/include/eigen3 -I/usr/include/python2.7
+CCFLAGS += -I/usr/local/include -I/usr/include/eigen3 -I/usr/local/include/bullet -I/usr/include/python2.7
 CCFLAGS += -I/home/osushkov/Programming/boost_1_64_0
 CCFLAGS += -Wall -Wno-deprecated-declarations -Wno-unused-variable
 
+CUDAFLAGS += --std=c++11
+CUDAFLAGS += --use_fast_math
+CUDAFLAGS += --default-stream per-thread
+CUDAFLAGS += -Xcudafe "--diag_suppress=boolean_controlling_expr_is_constant"
+
 ifdef RELEASE
-  CCFLAGS += -Ofast
+  CCFLAGS += -O3
+  CUDAFLAGS += -O3
 endif
 
 ifdef DEBUG
   CCFLAGS += -g
 endif
 
+CLFLAGS += -L/usr/local/cuda/lib64 -lcudart
 CLFLAGS += -L/usr/local/lib
 CLFLAGS += -L/usr/lib/python2.7/config
 CLFLAGS += -L/home/osushkov/Programming/boost_1_64_0/stage/lib
 
-CLFLAGS += -lpthread
+CLFLAGS += -lsfml-graphics -lsfml-window -lsfml-system
+CLFLAGS += -lBulletDynamics -lBulletCollision -lLinearMath
+CLFLAGS += -pthread
+CLFLAGS += -std=c++11
+CLFLAGS += -Wl,--no-as-needed
 CLFLAGS += -lboost_system -lboost_thread
 CLFLAGS += -lboost_python -lboost_numpy -lpython2.7

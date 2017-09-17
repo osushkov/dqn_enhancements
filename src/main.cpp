@@ -1,12 +1,13 @@
 
 #include "Evaluator.hpp"
-#include "common/Common.hpp"
 #include "learning/LearningAgent.hpp"
 #include "learning/RandomAgent.hpp"
 #include "learning/Trainer.hpp"
 #include "renderer/SFMLRenderer.hpp"
 #include "simulation/Cart.hpp"
 #include "simulation/PhysicsWorld.hpp"
+#include "util/Common.hpp"
+
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
